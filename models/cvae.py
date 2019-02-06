@@ -252,7 +252,7 @@ class KgRnnCVAE(BaseTFModel):
 
         with variable_scope.variable_scope("priorNetwork"):
             # P(XYZ)=P(Z|X)P(X)P(Y|X,Z)
-            prior_fc1 = layers.fully_connected(cond_embedding, np.maximum(config.latent_size * 2, 100),
+            prior_fc1 = layers.fully_connected(cond_embedding, int(np.maximum(config.latent_size * 2, 100)),
                                                activation_fn=tf.tanh, scope="fc1")
             prior_mulogvar = layers.fully_connected(prior_fc1, config.latent_size * 2, activation_fn=None,
                                                     scope="muvar")
