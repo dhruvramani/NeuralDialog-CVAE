@@ -156,14 +156,19 @@ class SWDADialogCorpus(object):
         id_test = _to_id_corpus(self.test_corpus[self.dialog_id])
         return {'train': id_train, 'valid': id_valid, 'test': id_test}
 
+    def get_max(self, topics):
+        topics = topics.split(" ")
+        topics.sort(key = len)
+        return topics[0]
+
     def get_meta_corpus(self):
         def _to_id_corpus(data):
             results = []
             for topics in data:
                 try :
-                    results.append([self.rev_topic_vocab[topic] for topic in topics.split(" ")])
+                    results.append(self.rev_topic_vocab[get_max(topics)])
                 except:
-                    results.append(["<unk>"])
+                    results.append(self.rev_topic_vocab["<unk>"])
             return results
 
         id_train = _to_id_corpus(self.train_corpus[self.meta_id])
