@@ -27,11 +27,9 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
             characters = linei["characters"]
 
             charA, charB = characters[dialog["A"]], characters[dialog["B"]]
-            print(charA, charB)
-            _ = input()
             if(charA["app"] == True):
                 try :
-                    mystring = str(charA["emotion"]["ann0"]["text"])
+                    mystring = str(charA["emotion"]["ann0"]["text"][0])
                     re.sub('[^A-Za-z]+', '', mystring)
                     uttr = ("A", linei["text"], [mystring])
                     utterances.append(uttr)
@@ -39,7 +37,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     pass
             if(charB["app"] == True):
                 try :
-                    mystring = str(charB["emotion"]["ann0"]["text"])
+                    mystring = str(charB["emotion"]["ann0"]["text"][0])
                     re.sub('[^A-Za-z]+', '', mystring)
                     uttr = ("B", linei["text"], [mystring])
                     utterances.append(uttr)
