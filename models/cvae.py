@@ -151,8 +151,8 @@ class KgRnnCVAE(BaseTFModel):
             self.floors = tf.placeholder(dtype=tf.int32, shape=(None, None), name="floor")
             self.context_lens = tf.placeholder(dtype=tf.int32, shape=(None,), name="context_lens")
             self.topics = tf.placeholder(dtype=tf.int32, shape=(None,), name="topics")
-            self.my_profile = tf.placeholder(dtype=tf.float32, shape=(None, 4), name="my_profile")
-            self.ot_profile = tf.placeholder(dtype=tf.float32, shape=(None, 4), name="ot_profile")
+            #self.my_profile = tf.placeholder(dtype=tf.float32, shape=(None, 4), name="my_profile")
+            #self.ot_profile = tf.placeholder(dtype=tf.float32, shape=(None, 4), name="ot_profile")
 
             # target response given the dialog context
             self.output_tokens = tf.placeholder(dtype=tf.int32, shape=(None, None), name="output_token")
@@ -239,7 +239,7 @@ class KgRnnCVAE(BaseTFModel):
             attribute_embedding = da_embedding
             attribute_fc1 = layers.fully_connected(attribute_embedding, 30, activation_fn=tf.tanh, scope="attribute_fc1")
 
-        cond_list = [topic_embedding, self.my_profile, self.ot_profile, enc_last_state]
+        cond_list = [topic_embedding, enc_last_state]
         cond_embedding = tf.concat(cond_list, 1)
 
         with variable_scope.variable_scope("recognitionNetwork"):
@@ -400,10 +400,9 @@ class KgRnnCVAE(BaseTFModel):
         self.saver = tf.train.Saver(tf.global_variables(), write_version=tf.train.SaverDef.V2)
 
     def batch_2_feed(self, batch, global_t, use_prior, repeat=1):
-        context, context_lens, floors, topics, my_profiles, ot_profiles, outputs, output_lens, output_das = batch
+        context, context_lens, floors, topics, outputs, output_lens, output_das = batch
         feed_dict = {self.input_contexts: context, self.context_lens:context_lens,
-                     self.floors: floors, self.topics:topics, self.my_profile: my_profiles,
-                     self.ot_profile: ot_profiles, self.output_tokens: outputs,
+                     self.floors: floors, self.topics:topics, self.output_tokens: outputs,
                      self.output_das: output_das, self.output_lens: output_lens,
                      self.use_prior: use_prior}
         if repeat > 1:
