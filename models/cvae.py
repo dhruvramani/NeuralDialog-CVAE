@@ -14,7 +14,7 @@ from tensorflow.python.ops import embedding_ops
 from tensorflow.python.ops import rnn_cell_impl as rnn_cell
 from tensorflow.python.ops import variable_scope
 
-import .decoder_fn_lib
+from . import decoder_fn_lib
 import .utils
 from .models.seq2seq import dynamic_rnn_decoder
 from .utils import gaussian_kld
