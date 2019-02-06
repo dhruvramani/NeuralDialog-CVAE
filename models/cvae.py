@@ -23,6 +23,7 @@ from .utils import get_bow
 from .utils import get_rnn_encode
 from .utils import norm_log_liklihood
 from .utils import sample_gaussian
+from sklearn.metrics import f1_score
 
 
 class BaseTFModel(object):
@@ -493,6 +494,7 @@ class KgRnnCVAE(BaseTFModel):
         local_t = 0
         recall_bleus = []
         prec_bleus = []
+        f1_scores = []
 
         while True:
             batch = test_feed.next_batch()
@@ -538,6 +540,8 @@ class KgRnnCVAE(BaseTFModel):
                     local_tokens.append(pred_tokens)
 
                 max_bleu, avg_bleu = utils.get_bleu_stats(true_tokens, local_tokens)
+                f1 = f1_score(true_tokens, local_tokens, average='micro')
+                f1_scores.append(f1)
                 recall_bleus.append(max_bleu)
                 prec_bleus.append(avg_bleu)
                 # make a new line for better readability
@@ -545,7 +549,7 @@ class KgRnnCVAE(BaseTFModel):
 
         avg_recall_bleu = float(np.mean(recall_bleus))
         avg_prec_bleu = float(np.mean(prec_bleus))
-        avg_f1 = 2*(avg_prec_bleu*avg_recall_bleu) / (avg_prec_bleu+avg_recall_bleu+10e-12)
+        avg_f1 = float(np.mean(f1_scores))#2*(avg_prec_bleu*avg_recall_bleu) / (avg_prec_bleu+avg_recall_bleu+10e-12)
         report = "Avg recall BLEU %f, avg precision BLEU %f and F1 %f (only 1 reference response. Not final result)" \
                  % (avg_recall_bleu, avg_prec_bleu, avg_f1)
         print(report)
