@@ -513,11 +513,6 @@ class KgRnnCVAE(BaseTFModel):
             true_das = feed_dict[self.output_das]
             local_t += 1
 
-            print(true_outs, word_outs, da_logits)
-            _ = input()
-            #f1 = f1_score(true_tokens, local_tokens, average='micro')
-            #f1_scores.append(f1)
-
             if dest != sys.stdout:
                 if local_t % (test_feed.num_batch / 10) == 0:
                     print("%.2f >> " % (test_feed.ptr / float(test_feed.num_batch))),
@@ -544,6 +539,10 @@ class KgRnnCVAE(BaseTFModel):
                     dest.write("Sample %d (%s) >> %s\n" % (r_id, self.da_vocab[pred_da], pred_str))
                     local_tokens.append(pred_tokens)
 
+                print(true_tokens, local_tokens)
+                _ = input()
+                #f1 = f1_score(true_tokens, local_tokens, average='micro')
+                #f1_scores.append(f1)
                 max_bleu, avg_bleu = utils.get_bleu_stats(true_tokens, local_tokens)
                 recall_bleus.append(max_bleu)
                 prec_bleus.append(avg_bleu)
