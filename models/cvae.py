@@ -541,10 +541,8 @@ class KgRnnCVAE(BaseTFModel):
                     local_tokens.append(pred_tokens)
                     local_da.append(pred_da)
 
-                print(true_das, local_da)
-                _ = input(" ")
-                #f1 = f1_score(true_tokens, local_tokens, average='micro')
-                #f1_scores.append(f1)
+                f1 = f1_score(true_das, local_da, average='micro')
+                f1_scores.append(f1)
                 max_bleu, avg_bleu = utils.get_bleu_stats(true_tokens, local_tokens)
                 recall_bleus.append(max_bleu)
                 prec_bleus.append(avg_bleu)
@@ -553,7 +551,7 @@ class KgRnnCVAE(BaseTFModel):
 
         avg_recall_bleu = float(np.mean(recall_bleus))
         avg_prec_bleu = float(np.mean(prec_bleus))
-        avg_f1 = 2*(avg_prec_bleu*avg_recall_bleu) / (avg_prec_bleu+avg_recall_bleu+10e-12) #float(np.mean(f1_scores)) #
+        avg_f1 = float(np.mean(f1_scores)) # 2*(avg_prec_bleu*avg_recall_bleu) / (avg_prec_bleu+avg_recall_bleu+10e-12) #f
         report = "Avg recall BLEU %f, avg precision BLEU %f and F1 %f (only 1 reference response. Not final result)" \
                  % (avg_recall_bleu, avg_prec_bleu, avg_f1)
         print(report)
