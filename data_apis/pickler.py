@@ -1,3 +1,4 @@
+import re
 import os
 import json
 import pickle
@@ -26,6 +27,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
             characters = linei["characters"]
 
             charA, charB = characters[dialog["A"]], characters[dialog["B"]]
+            print(charA, charB)
             if(charA["app"] == True):
                 try :
                     mystring = charA["emotion"]["ann0"]["plutchik"]
