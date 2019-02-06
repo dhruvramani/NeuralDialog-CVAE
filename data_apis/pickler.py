@@ -42,10 +42,10 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     re.sub('[^A-Za-z]+', '', mystring)
                     uttr = ("B", linei["text"], [mystring[:-2]])
                     utterances.append(uttr)
+                    count += 1
                 except :
                     pass
         print(utterances)
-        count += 1
         dialog["utts"] = utterances
         to_write[tdt].append(dialog)
     print(count)
