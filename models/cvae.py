@@ -16,7 +16,7 @@ from tensorflow.python.ops import variable_scope
 
 from . import decoder_fn_lib
 from . import utils
-from .models.seq2seq import dynamic_rnn_decoder
+from models.seq2seq import dynamic_rnn_decoder
 from .utils import gaussian_kld
 from .utils import get_bi_rnn_encode
 from .utils import get_bow
