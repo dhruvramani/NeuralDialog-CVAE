@@ -78,7 +78,7 @@ def main():
 
         # write config to a file for logging
         if not FLAGS.forward_only:
-            with open(os.path.join(log_dir, "run.log"), "wb") as f:
+            with open(os.path.join(log_dir, "run.log"), "w") as f:
                 f.write(pp(config, output=False))
 
         # create a folder by force
