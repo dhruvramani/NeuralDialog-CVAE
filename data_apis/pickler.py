@@ -21,7 +21,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
             continue
         dialog["A"] = chars[0]
         dialog["B"] = chars[1] # TODO : Change
-        dialog["topic"] = story["title"]
+        dialog["topic"] = story["title"].lower()
         utterances = list()
         for stline in range(5):
             linei = story["lines"]["{}".format(stline + 1)]
