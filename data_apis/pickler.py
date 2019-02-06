@@ -33,15 +33,15 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     re.sub('[^A-Za-z]+', '', mystring)
                     uttr = ("A", linei["text"], [mystring])
                     utterances.append(uttr)
-                except KeyError:
+                except :
                     pass
             if(charB["app"] == True):
                 try :
                     mystring = str(charB["emotion"]["ann0"]["plutchik"][0])
                     re.sub('[^A-Za-z]+', '', mystring)
-                    uttr = ("B", linei["text"], [mystring])
+                    uttr = ("B", linei["text"], [mystring[:-2]])
                     utterances.append(uttr)
-                except KeyError:
+                except :
                     pass
         print(utterances)
         dialog["utts"] = utterances
