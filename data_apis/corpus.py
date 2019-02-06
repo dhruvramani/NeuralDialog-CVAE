@@ -86,7 +86,7 @@ class SWDADialogCorpus(object):
         # create topic vocab
         all_topics = []
         for topics in self.train_corpus[self.meta_id]: # for a, b, topic
-            for topic in topics.split(" ")
+            for topic in topics.split(" "):
                 all_topics.append(topic)
         self.topic_vocab = [t for t, cnt in Counter(all_topics).most_common()]
         self.rev_topic_vocab = {t: idx for idx, t in enumerate(self.topic_vocab)}
