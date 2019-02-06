@@ -118,7 +118,7 @@ class SWDADataLoader(LongDataLoader):
         meta_rows = [self.meta_data[idx] for idx in batch_ids]
         dialog_lens = [self.data_lens[idx] for idx in batch_ids]
 
-        topics = np.array([meta[0] for meta in meta_rows])
+        topics = np.array([meta for meta in meta_rows])
         cur_pos = [np.minimum(1.0, e_id/float(l)) for l in dialog_lens]
 
         # input_context, context_lens, floors, topics, a_profiles, b_Profiles, outputs, output_lens
