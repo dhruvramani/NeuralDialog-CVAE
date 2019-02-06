@@ -88,6 +88,7 @@ class SWDADialogCorpus(object):
         for topics in self.train_corpus[self.meta_id]: # for a, b, topic
             for topic in topics.split(" "):
                 all_topics.append(topic)
+            all_topics.append("<unk>")
         self.topic_vocab = [t for t, cnt in Counter(all_topics).most_common()]
         self.rev_topic_vocab = {t: idx for idx, t in enumerate(self.topic_vocab)}
         print("%d topics in train data" % len(self.topic_vocab))
@@ -162,7 +163,7 @@ class SWDADialogCorpus(object):
                 try :
                     results.append([self.rev_topic_vocab[topic] for topic in topics.split(" ")])
                 except:
-                    pass
+                    results.append(["<unk>"])
             return results
 
         id_train = _to_id_corpus(self.train_corpus[self.meta_id])
