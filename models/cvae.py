@@ -531,6 +531,7 @@ class KgRnnCVAE(BaseTFModel):
                 # print the predicted outputs
                 dest.write("Target (%s) >> %s\n" % (da_str, true_str))
                 local_tokens = []
+                local_da = []
                 for r_id in range(repeat):
                     pred_outs = sample_words[r_id]
                     pred_da = np.argmax(sample_das[r_id], axis=1)[0]
@@ -538,7 +539,10 @@ class KgRnnCVAE(BaseTFModel):
                     pred_str = " ".join(pred_tokens).replace(" ' ", "'")
                     dest.write("Sample %d (%s) >> %s\n" % (r_id, self.da_vocab[pred_da], pred_str))
                     local_tokens.append(pred_tokens)
+                    local_da.append(pred_da)
 
+                print(true_das, local_da)
+                _ = input(" ")
                 #f1 = f1_score(true_tokens, local_tokens, average='micro')
                 #f1_scores.append(f1)
                 max_bleu, avg_bleu = utils.get_bleu_stats(true_tokens, local_tokens)
