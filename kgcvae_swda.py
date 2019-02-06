@@ -108,6 +108,7 @@ def main():
                     train_feed.epoch_init(config.batch_size, config.backward_size,
                                           config.step_size, shuffle=True)
                 global_t, train_loss = model.train(global_t, sess, train_feed, update_limit=config.update_limit)
+                print("Training Loss : {}".format(train_loss))
 
                 # begin validation
                 valid_feed.epoch_init(valid_config.batch_size, valid_config.backward_size,
@@ -138,6 +139,7 @@ def main():
                 if config.early_stop and patience <= done_epoch:
                     print("!!Early stop due to run out of patience!!")
                     break
+
             print("Best validation loss %f" % best_dev_loss)
             print("Done training")
         else:
