@@ -27,7 +27,8 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
             characters = linei["characters"]
 
             charA, charB = characters[dialog["A"]], characters[dialog["B"]]
-            #print(charA, charB)
+            print(charA, charB)
+            _ = input()
             if(charA["emotion"]["ann0"]["app"] == True):
                 try :
                     mystring = charA["emotion"]["ann0"]["plutchik"]
