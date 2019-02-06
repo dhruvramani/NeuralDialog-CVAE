@@ -61,7 +61,7 @@ class LongDataLoader(object):
                 cut_end = range(self.backward_size, num_seg*self.step_size+self.backward_size, step_size)
                 assert cut_end[-1] < max_len
                 cut_start = [0] * (self.backward_size-2) + list(cut_start) # since we give up on the seq training idea
-                cut_end = range(2, self.backward_size) + list(cut_end)
+                cut_end = list(range(2, self.backward_size)) + list(cut_end)
             else:
                 cut_start = [0] * (max_len-2)
                 cut_end = range(2, max_len)
