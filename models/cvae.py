@@ -540,9 +540,11 @@ class KgRnnCVAE(BaseTFModel):
                     local_tokens.append(pred_tokens)
 
                 max_bleu, avg_bleu = utils.get_bleu_stats(true_tokens, local_tokens)
-                print(len(true_tokens), len(local_tokens))
-                f1 = f1_score(true_tokens, local_tokens, average='micro')
-                f1_scores.append(f1)
+                if(len(true_tokens) == len(local_tokens)):
+                    f1 = f1_score(true_tokens, local_tokens, average='micro')
+                    f1_scores.append(f1)
+                else :
+                    print("skipped")
                 recall_bleus.append(max_bleu)
                 prec_bleus.append(avg_bleu)
                 # make a new line for better readability
