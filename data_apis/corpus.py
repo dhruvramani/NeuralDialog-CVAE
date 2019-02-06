@@ -103,7 +103,7 @@ class SWDADialogCorpus(object):
     def load_word2vec(self):
         if self.word_vec_path is None:
             return
-        with open(self.word_vec_path, "rb") as f:
+        with open(self.word_vec_path, "r") as f:
             lines = f.readlines()
         raw_word2vec = {}
         for l in lines:
