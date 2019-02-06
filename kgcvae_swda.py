@@ -14,7 +14,7 @@ from models.cvae import KgRnnCVAE
 
 # constants
 tf.app.flags.DEFINE_string("word2vec_path", "/home/nevronas/word_embeddings/glove_twitter/glove.twitter.27B.200d.txt", "The path to word2vec. Can be None.")
-tf.app.flags.DEFINE_string("data_dir", "data/commonsense/data.pkl" "Raw data directory.")
+tf.app.flags.DEFINE_string("data_dir", "data/commonsense/data.pkl", "Raw data directory.")
 tf.app.flags.DEFINE_string("work_dir", "working", "Experiment results directory.")
 tf.app.flags.DEFINE_bool("equal_batch", True, "Make each batch has similar length.")
 tf.app.flags.DEFINE_bool("resume", False, "Resume from previous")
