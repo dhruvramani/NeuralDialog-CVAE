@@ -39,7 +39,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     pass
             if(charB["app"] == True):
                 try :
-                    mystring = charB["emotion"]["ann0"]["text"]
+                    mystring = str(charB["emotion"]["ann0"]["text"])
                     re.sub('[^A-Za-z]+', '', mystring)
                     uttr = ("B", linei["text"], [mystring])
                     utterances.append(uttr)
