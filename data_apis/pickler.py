@@ -27,8 +27,8 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
             characters = linei["characters"]
 
             charA, charB = characters[dialog["A"]], characters[dialog["B"]]
-            print(charA, charB)
-            if(charA["app"] == True):
+            #print(charA, charB)
+            if(charA["emotion"]["ann0"]["app"] == True):
                 try :
                     mystring = charA["emotion"]["ann0"]["plutchik"]
                     re.sub('[^A-Za-z]+', '', mystring)
@@ -36,7 +36,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     utterances.append(uttr)
                 except KeyError:
                     pass
-            if(charB["app"] == True):
+            if(charB["emotion"]["ann0"]["app"] == True):
                 try :
                     mystring = charB["emotion"]["ann0"]["plutchik"]
                     re.sub('[^A-Za-z]+', '', mystring)
