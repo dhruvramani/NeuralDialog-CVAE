@@ -48,6 +48,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
         print(utterances)
         dialog["utts"] = utterances
         to_write[tdt].append(dialog)
+    to_write["train"] = to_write["valid"]
     print(count)
 
 with open(_DIR + "data/commonsense/data.pkl", "wb+") as handle:
