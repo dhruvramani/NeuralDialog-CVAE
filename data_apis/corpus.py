@@ -158,7 +158,10 @@ class SWDADialogCorpus(object):
         def _to_id_corpus(data):
             results = []
             for topics in data:
-                results.append([self.rev_topic_vocab[topic] for topic in topics.split(" ")])
+                try :
+                    results.append([self.rev_topic_vocab[topic] for topic in topics.split(" ")])
+                except:
+                    pass
             return results
 
         id_train = _to_id_corpus(self.train_corpus[self.meta_id])
