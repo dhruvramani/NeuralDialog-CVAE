@@ -8,6 +8,7 @@ _DIR = "/home/nevronas/Projects/Personal-Projects/Dhruv/NeuralDialog-CVAE/"
 file = open(_DIR + "data/commonsense/json_version/annotations.json", "r")
 data = json.load(file)
 to_write = {"train" : list(), "valid" : list(), "test" : list()}
+count = 0
 
 with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
     for line in f:
@@ -31,7 +32,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                 try :
                     mystring = str(charA["emotion"]["ann0"]["plutchik"][0])
                     re.sub('[^A-Za-z]+', '', mystring)
-                    uttr = ("A", linei["text"], [mystring])
+                    uttr = ("A", linei["text"], [mystring[:-2]])
                     utterances.append(uttr)
                 except :
                     pass
@@ -44,8 +45,10 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                 except :
                     pass
         print(utterances)
+        count += 1
         dialog["utts"] = utterances
         to_write[tdt].append(dialog)
+    print(count)
 
 with open(_DIR + "data/commonsense/data.pkl", "wb+") as handle:
     pickle.dump(to_write, handle)
