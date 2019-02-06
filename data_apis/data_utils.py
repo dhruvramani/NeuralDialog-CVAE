@@ -118,7 +118,7 @@ class SWDADataLoader(LongDataLoader):
         meta_rows = [self.meta_data[idx] for idx in batch_ids]
         dialog_lens = [self.data_lens[idx] for idx in batch_ids]
 
-        topics = np.array([meta[2] for meta in meta_rows])
+        topics = np.array([meta[0] for meta in meta_rows])
         cur_pos = [np.minimum(1.0, e_id/float(l)) for l in dialog_lens]
 
         # input_context, context_lens, floors, topics, a_profiles, b_Profiles, outputs, output_lens
@@ -144,8 +144,8 @@ class SWDADataLoader(LongDataLoader):
                 raise ValueError("S_ID %d larger than row" % s_id)
 
         # my_profiles = np.array([meta[out_floors[idx]] + [cur_pos[idx]] for idx, meta in enumerate(meta_rows)])
-        my_profiles = np.array([meta[out_floors[idx]] for idx, meta in enumerate(meta_rows)])
-        ot_profiles = np.array([meta[1-out_floors[idx]] for idx, meta in enumerate(meta_rows)])
+        #my_profiles = np.array([meta[out_floors[idx]] for idx, meta in enumerate(meta_rows)])
+        #ot_profiles = np.array([meta[1-out_floors[idx]] for idx, meta in enumerate(meta_rows)])
         vec_context_lens = np.array(context_lens)
         vec_context = np.zeros((self.batch_size, np.max(vec_context_lens), self.max_utt_size), dtype=np.int32)
         vec_floors = np.zeros((self.batch_size, np.max(vec_context_lens)), dtype=np.int32)
@@ -158,7 +158,7 @@ class SWDADataLoader(LongDataLoader):
             vec_floors[b_id, 0:vec_context_lens[b_id]] = floors[b_id]
             vec_context[b_id, 0:vec_context_lens[b_id], :] = np.array(context_utts[b_id])
 
-        return vec_context, vec_context_lens, vec_floors, topics, my_profiles, ot_profiles, vec_outs, vec_out_lens, vec_out_das
+        return vec_context, vec_context_lens, vec_floors, topics, vec_outs, vec_out_lens, vec_out_das # my_profiles, ot_profiles
 
 
 

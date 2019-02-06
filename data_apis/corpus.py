@@ -44,15 +44,15 @@ class SWDADialogCorpus(object):
                           for caller, utt, feat in l["utts"]]
             all_lenes.extend([len(u) for c, u, f in lower_utts])
 
-            a_age = float(l["A"]["age"])/100.0
-            b_age = float(l["B"]["age"])/100.0
-            a_edu = float(l["A"]["education"])/3.0
-            b_edu = float(l["B"]["education"])/3.0
-            vec_a_meta = [a_age, a_edu] + ([0, 1] if l["A"]["sex"] == "FEMALE" else [1, 0])
-            vec_b_meta = [b_age, b_edu] + ([0, 1] if l["B"]["sex"] == "FEMALE" else [1, 0])
+            #a_age = float(l["A"]["age"])/100.0
+            #b_age = float(l["B"]["age"])/100.0
+            #a_edu = float(l["A"]["education"])/3.0
+            #b_edu = float(l["B"]["education"])/3.0
+            #vec_a_meta = [a_age, a_edu] + ([0, 1] if l["A"]["sex"] == "FEMALE" else [1, 0])
+            #vec_b_meta = [b_age, b_edu] + ([0, 1] if l["B"]["sex"] == "FEMALE" else [1, 0])
 
             # for joint model we mode two side of speakers together. if A then its 0 other wise 1
-            meta = (vec_a_meta, vec_b_meta, l["topic"])
+            meta = (l["topic"]) #(vec_a_meta, vec_b_meta, l["topic"])
             dialog = [(bod_utt, 0, None)] + [(utt, int(caller=="B"), feat) for caller, utt, feat in lower_utts]
 
             new_utts.extend([bod_utt] + [utt for caller, utt, feat in lower_utts])
@@ -85,7 +85,7 @@ class SWDADialogCorpus(object):
 
         # create topic vocab
         all_topics = []
-        for a, b, topic in self.train_corpus[self.meta_id]:
+        for topic in self.train_corpus[self.meta_id]: # for a, b, topic
             all_topics.append(topic)
         self.topic_vocab = [t for t, cnt in Counter(all_topics).most_common()]
         self.rev_topic_vocab = {t: idx for idx, t in enumerate(self.topic_vocab)}

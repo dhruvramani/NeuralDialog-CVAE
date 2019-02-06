@@ -13,7 +13,7 @@ from data_apis.data_utils import SWDADataLoader
 from models.cvae import KgRnnCVAE
 
 # constants
-tf.app.flags.DEFINE_string("word2vec_path", None, "The path to word2vec. Can be None.")
+tf.app.flags.DEFINE_string("word2vec_path", "/home/nevronas/word_embeddings/glove_twitter/glove.twitter.27B.200d.txt", "The path to word2vec. Can be None.")
 tf.app.flags.DEFINE_string("data_dir", "data/full_swda_clean_42da_sentiment_dialog_corpus.p", "Raw data directory.")
 tf.app.flags.DEFINE_string("work_dir", "working", "Experiment results directory.")
 tf.app.flags.DEFINE_bool("equal_batch", True, "Make each batch has similar length.")
