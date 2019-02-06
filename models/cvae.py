@@ -540,7 +540,7 @@ class KgRnnCVAE(BaseTFModel):
                     local_tokens.append(pred_tokens)
 
                 max_bleu, avg_bleu = utils.get_bleu_stats(true_tokens, local_tokens)
-                print(true_tokens.shape, local_tokens.shape)
+                print(len(true_tokens), len(local_tokens))
                 f1 = f1_score(true_tokens, local_tokens, average='micro')
                 f1_scores.append(f1)
                 recall_bleus.append(max_bleu)
