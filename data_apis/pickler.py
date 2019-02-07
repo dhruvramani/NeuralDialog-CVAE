@@ -23,6 +23,8 @@ def get_labels(charay):
                 if(i[:-2] in final_dict.keys()):
                     final_dict[i[:-2]][idx] = int(i[-1])
 
+        print(final_dict)
+        _ = input()
         majority = []
         for key in final_dict.keys():
             if(floor(sum(final_dict[key])/3) >= 2):
