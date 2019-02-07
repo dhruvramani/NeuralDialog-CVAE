@@ -12,8 +12,22 @@ count = 0
 classes = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"]
 
 def get_labels(charay):
+    ann = []
     try :
-        ann = [charay["emotion"]["ann0"]["plutchik"], charay["emotion"]["ann1"]["plutchik"], charay["emotion"]["ann2"]["plutchik"]]
+        ann = [charay["emotion"]["ann0"]["plutchik"]]
+    except:
+        pass 
+    try :
+        ann.append(charay["emotion"]["ann1"]["plutchik"])
+    except:
+        pass
+    try :
+        ann.append(charay["emotion"]["ann2"]["plutchik"]])
+    except:
+        pass
+    if(len(ann) == 0)
+        return None
+    try :
         final_dict = dict()
         for classi in classes:
             final_dict[classi] = [1, 1, 1]
