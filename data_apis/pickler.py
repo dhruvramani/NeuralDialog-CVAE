@@ -16,37 +16,35 @@ def get_labels(charay):
     try :
         ann = [charay["emotion"]["ann0"]["plutchik"]]
     except:
-        pass 
+        print("ann0 ignored")
     try :
         ann.append(charay["emotion"]["ann1"]["plutchik"])
     except:
-        pass
+        print("ann1 ignored")
     try :
         ann.append(charay["emotion"]["ann2"]["plutchik"])
     except:
-        pass
+        print("ann2 ignored")
     if(len(ann) == 0):
         return None
-    try :
-        final_dict = dict()
-        for classi in classes:
-            final_dict[classi] = [1, 1, 1]
 
-        for idx in range(len(ann)):
-            for i in ann[idx]:
-                if(i[:-2] in final_dict.keys()):
-                    final_dict[i[:-2]][idx] = int(i[-1])
+    final_dict = dict()
+    for classi in classes:
+        final_dict[classi] = [1, 1, 1]
 
-        print(final_dict)
-        _ = input()
-        majority = []
-        for key in final_dict.keys():
-            if(floor(sum(final_dict[key])/3) >= 2):
-                majority.append(key) #[key if(floor(sum(final_dict[key]) / 3) >= 2) for key in final_dict.keys()]
-        onehot = [1 if i in majority else 0 for i in classes]
-        return onehot
-    except :
-        return None
+    for idx in range(len(ann)):
+        for i in ann[idx]:
+            if(i[:-2] in final_dict.keys()):
+                final_dict[i[:-2]][idx] = int(i[-1])
+
+    print(final_dict)
+    _ = input()
+    majority = []
+    for key in final_dict.keys():
+        if(floor(sum(final_dict[key])/3) >= 2):
+            majority.append(key) #[key if(floor(sum(final_dict[key]) / 3) >= 2) for key in final_dict.keys()]
+    onehot = [1 if i in majority else 0 for i in classes]
+    return onehot
 
 with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
     for line in f:
