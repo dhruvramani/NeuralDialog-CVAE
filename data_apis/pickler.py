@@ -75,7 +75,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     uttr = ("B", linei["text"], [onehotm])
                     utterances.append(uttr)
                     if(not tr):
-                        coutn += 1
+                        count += 1
 
 
         print(utterances)
