@@ -23,7 +23,7 @@ def get_labels(charay):
                 if(i[:-2] in final_dict.keys()):
                     final_dict[i[:-2]][idx] = int(i[-1])
 
-        majority = [key if floor(sum(final_dict[key]) / 3) >= 2 for key in final_dict.keys()]
+        majority = [key if(floor(sum(final_dict[key]) / 3) >= 2) for key in final_dict.keys()]
         onehot = [1 if i in majority else 0 for i in classes]
         return onehot
         #re.sub('[^A-Za-z]+', '', mystring)
