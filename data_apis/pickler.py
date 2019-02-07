@@ -25,7 +25,7 @@ def get_labels(charay):
         ann.append(charay["emotion"]["ann2"]["plutchik"])
     except:
         pass
-    if(len(ann) == 0)
+    if(len(ann) == 0):
         return None
     try :
         final_dict = dict()
