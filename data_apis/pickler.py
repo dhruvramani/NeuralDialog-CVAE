@@ -65,12 +65,12 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
 
             charA, charB = characters[dialog["A"]], characters[dialog["B"]]
             if(charA["app"] == True):
-                onehotm = get_labels(charA["app"])
+                onehotm = get_labels(charA)
                 if(onehotm != None):
                     uttr = ("A", linei["text"], [onehotm])
                     utterances.append(uttr)
             if(charB["app"] == True):
-                onehotm = get_labels(charB["app"])
+                onehotm = get_labels(charB)
                 if(onehotm != None):
                     uttr = ("B", linei["text"], [onehotm])
                     utterances.append(uttr)
