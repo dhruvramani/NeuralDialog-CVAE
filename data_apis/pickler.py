@@ -41,7 +41,7 @@ def get_labels(charay):
     _ = input()
     majority = []
     for key in final_dict.keys():
-        if(floor(sum(final_dict[key])/3) >= 2):
+        if(int(sum(final_dict[key])/3) >= 2):
             majority.append(key) #[key if(floor(sum(final_dict[key]) / 3) >= 2) for key in final_dict.keys()]
     onehot = [1 if i in majority else 0 for i in classes]
     return onehot
