@@ -22,7 +22,7 @@ def get_labels(charay):
     except:
         pass
     try :
-        ann.append(charay["emotion"]["ann2"]["plutchik"]])
+        ann.append(charay["emotion"]["ann2"]["plutchik"])
     except:
         pass
     if(len(ann) == 0)
