@@ -8,7 +8,7 @@ _DIR = "/home/nevronas/Projects/Personal-Projects/Dhruv/NeuralDialog-CVAE/"
 file = open(_DIR + "data/commonsense/json_version/annotations.json", "r")
 data = json.load(file)
 to_write = {"train" : list(), "valid" : list(), "test" : list()}
-count = 0
+count, zerc = 0, 0
 classes = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"]
 
 def get_labels(charay):
@@ -69,6 +69,10 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     utterances.append(uttr)
                     count += 1
                     tr = True
+                    try : 
+                        _ = onehotm.index(1)
+                    except ValueError:
+                        zerc += 1
             if(charB["app"] == True):
                 onehotm = get_labels(charB)
                 if(onehotm != None):
@@ -76,6 +80,10 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
                     utterances.append(uttr)
                     if(not tr):
                         count += 1
+                    try : 
+                        _ = onehotm.index(1)
+                    except ValueError:
+                        zerc += 1
 
 
         print(utterances)
@@ -83,7 +91,7 @@ with open(_DIR + "data/commonsense/storyid_partition.txt", "r") as f:
         to_write[tdt].append(dialog)
     dev_len = len(to_write["valid"])
     to_write["train"], to_write["valid"] = to_write["valid"][:int(0.8 * dev_len)], to_write["valid"][int(0.8 * dev_len) + 1:]
-    print(count)
+    print(count, zerc)
 
 with open(_DIR + "data/commonsense/data.pkl", "wb+") as handle:
     pickle.dump(to_write, handle)
